@@ -37,6 +37,26 @@ make hpgltools.sif
 sudo -E singularity build hpgltools.sif hpgltools.yml
 ```
 
+# Creating a child container
+
+I imagine that the primary use-case of this repository is to use it as
+the parent of a container which contains a set of actual analyses.
+Therefore, there is an image available at:
+
+https://cloud.sylabs.io/library/abelew/hpgltools/hpgltools.sif
+
+This may be used by another container by setting the child container's
+bootstrap section to some variant of the following:
+
+```{yml}
+Bootstrap: library
+From: abelew/hpgltools/hpgltools.sif:sha256.8d35a6e57ac2148acde403611a81d941b526e5435d970933e97f241f2341f168
+```
+
+The resulting container's runscript ideally is basically ready for an
+arbitrary set of analyses once the input sample sheet and data files
+are provided.
+
 # Generating the html/rda/excel output files
 
 One of the neat things about singularity is the fact that one may just
